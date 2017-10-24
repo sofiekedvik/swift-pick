@@ -8,18 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+ 
+    @IBOutlet weak var number: UILabel!
+    var sendToNext = 1;
+    
+    @IBAction func stepper(_ sender: UIStepper) {
+        let roundUp = Int(sender.value)
+        number.text =  String(roundUp)
+        sendToNext = roundUp
+    }
+    
+    @IBAction func goButton(_ sender: UIButton) {
+        let ColorViewController = self.storyboard?.instantiateViewController(withIdentifier: "colors") as! ColorViewController
+        _ = ColorViewController.view
+        
+        ColorViewController.number = self.sendToNext
+        self.present(ColorViewController, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
